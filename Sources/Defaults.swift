@@ -42,10 +42,10 @@ public final class Key<ValueType: Codable>: DefaultsKey {
 /// - Warning
 /// These should not be used to store sensitive information that could compromise
 /// the application or the user's security and privacy.
-public final class Defaults {
-    
-    private var userDefaults: UserDefaults
-    
+public final class Defaults: Sendable {
+
+    private let userDefaults: UserDefaults
+
     /// Shared instance of `Defaults`, used for ad-hoc access to the user's
     /// defaults database throughout the app.
     public static let shared = Defaults()
@@ -185,3 +185,5 @@ extension Defaults {
         set(value.rawValue, for: convertedKey)
     }
 }
+
+extension UserDefaults: @unchecked Sendable {}
